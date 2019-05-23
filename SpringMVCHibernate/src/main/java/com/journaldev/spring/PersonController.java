@@ -1,6 +1,5 @@
 package com.journaldev.spring;
 
-import java.awt.PageAttributes.MediaType;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.journaldev.spring.model.CreditDebit;
 import com.journaldev.spring.model.Group;
 import com.journaldev.spring.model.Person;
@@ -126,7 +126,7 @@ public class PersonController {
     
       @RequestMapping(value = "/getusersByGroup", method = RequestMethod.GET, produces = "application/json")
       @ResponseBody
-      public List<Person> getuserByGropName(@RequestParam int groupId, HttpServletRequest request,
+      public String getuserByGropName(@RequestParam int groupId, HttpServletRequest request,
     	        HttpServletResponse
     	        response) {
     	  System.out.println("myID"+groupId);
@@ -135,7 +135,9 @@ public class PersonController {
     	  {
     		  System.out.println(personsList.get(i).getLastName());
     	  }
-    	  return personsList;
+    	  Gson gson = new Gson();
+    	  String strPersonList = gson.toJson(personsList);
+    	  return strPersonList;
       }
     
 }

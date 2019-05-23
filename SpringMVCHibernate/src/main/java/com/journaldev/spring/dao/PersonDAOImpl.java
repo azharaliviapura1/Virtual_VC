@@ -2,6 +2,7 @@ package com.journaldev.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -122,10 +123,17 @@ public class PersonDAOImpl implements PersonDAO {
 
 	@Override
 	public List<Person> getUserByGroupId(int id) {
+//		Session session = this.sessionFactory.getCurrentSession();
+//		@SuppressWarnings("unchecked")
+//		List<Person> userList = session.createSQLQuery("from Person where group_name = '"+id+"'").list();
+//		return userList;
+		
 		Session session = this.sessionFactory.getCurrentSession();
-		@SuppressWarnings("unchecked")
-		List<Person> userList = session.createSQLQuery("select * from vc_users where GROUPS_ID = '"+id+"'").list();
-		return userList;
+		String hql = "from Person where group_name= :group_id";
+		Query query = session.createQuery(hql);
+		query.setParameter("group_id",id);
+		List<Person> personsList = query.list();
+		return personsList;
 	}
 
 
