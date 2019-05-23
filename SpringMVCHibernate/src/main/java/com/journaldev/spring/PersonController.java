@@ -1,5 +1,11 @@
 package com.journaldev.spring;
 
+import java.awt.PageAttributes.MediaType;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -8,7 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.journaldev.spring.model.CreditDebit;
 import com.journaldev.spring.model.Group;
 import com.journaldev.spring.model.Person;
 import com.journaldev.spring.service.PersonService;
@@ -24,10 +34,17 @@ public class PersonController {
 		this.personService = ps;
 	}
 	
+	
+	@RequestMapping(value = "/")
+    public ModelAndView redirectToMainPage() {
+        return new ModelAndView("home");
+    }
+	
 	@RequestMapping(value = "/persons", method = RequestMethod.GET)
 	public String listPersons(Model model) {
 		model.addAttribute("person", new Person());
 		model.addAttribute("listPersons", this.personService.listPersons());
+		model.addAttribute("listGroups", this.personService.listGroups());
 		return "person";
 	}
 	
@@ -98,6 +115,27 @@ public class PersonController {
           model.addAttribute("group", this.personService.getGroupById(id));
           model.addAttribute("listGroups", this.personService.listGroups());
           return "group";
+      }
+      
+      @RequestMapping(value = "/creditdebit", method = RequestMethod.GET)
+      public String creditDebit(Model model) {
+  		model.addAttribute("creditDebit", new CreditDebit());
+  		model.addAttribute("listGroups", this.personService.listGroups());
+  		return "creditDebit";
+  	}
+    
+      @RequestMapping(value = "/getusersByGroup", method = RequestMethod.GET, produces = "application/json")
+      @ResponseBody
+      public List<Person> getuserByGropName(@RequestParam int groupId, HttpServletRequest request,
+    	        HttpServletResponse
+    	        response) {
+    	  System.out.println("myID"+groupId);
+    	  List<Person> personsList = this.personService.getUserByGroupId(groupId);
+    	  for(int i = 0; i< personsList.size() ; i++)
+    	  {
+    		  System.out.println(personsList.get(i).getLastName());
+    	  }
+    	  return personsList;
       }
     
 }

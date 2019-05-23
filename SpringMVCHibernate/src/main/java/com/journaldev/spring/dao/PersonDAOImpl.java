@@ -109,5 +109,24 @@ public class PersonDAOImpl implements PersonDAO {
 		logger.info("Person deleted successfully, person details="+p);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Group> groupNameList() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<Group> groupList = session.createSQLQuery("select Group_Name from VC_groups").list();
+		/*for(Group p : groupList){
+			logger.info("Group List::"+p);
+		}*/
+		return groupList;
+	}
+
+	@Override
+	public List<Person> getUserByGroupId(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		@SuppressWarnings("unchecked")
+		List<Person> userList = session.createSQLQuery("select * from vc_users where GROUPS_ID = '"+id+"'").list();
+		return userList;
+	}
+
 
 }

@@ -78,4 +78,12 @@ public class PersonServiceImpl implements PersonService {
 		this.personDAO.removeGroup(id);
 	}
 
+	@Override
+	@Transactional
+	public List<Person> getUserByGroupId(int id) {
+		// TODO Auto-generated method stub
+		return this.personDAO.getUserByGroupId(id);
+	}
+
+
 }

@@ -17,5 +17,5 @@ public interface PersonService {
 	public Group getGroupById(int id);
 	public void removePerson(int id);
 	public void removeGroup(int id);
-	
+	public  List<Person> getUserByGroupId(int id);
 }

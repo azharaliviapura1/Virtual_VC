@@ -13,9 +13,8 @@
 	</style>
 </head>
 <body>
-
-	
-
+<jsp:include page="header.jsp" />
+<div class="container">
 <h1>
 	Add a Group
 </h1>
@@ -28,7 +27,7 @@
 	<tr>
 		<td>
 			<form:label path="id">
-				<spring:message text="ID"/>
+				<spring:message text="ID"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -40,17 +39,17 @@
 	<tr>
 		<td>
 			<form:label path="groupName">
-				<spring:message text="Name"/>
+				<spring:message text="Name"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
-			<form:input path="groupName" />
+			<form:input path="groupName" />&nbsp;&nbsp;
 		</td> 
 	</tr>
 	<tr>
 		<td>
 			<form:label path="type">
-				<spring:message text="Type"/>
+				<spring:message text="Type"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -61,7 +60,7 @@
 	<tr>
 		<td>
 			<form:label path="description">
-				<spring:message text="Description"/>
+				<spring:message text="Description"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -71,6 +70,7 @@
 	
 	<tr>
 		<td colspan="2">
+		</br>
 			<c:if test="${!empty group.groupName}">
 				<input type="submit"
 					value="<spring:message text="Edit Group"/>" />
@@ -81,6 +81,7 @@
 			</c:if>
 		</td>
 	</tr>
+	
 </table>	
 </form:form>
 <br>
@@ -107,5 +108,6 @@
 	</c:forEach>
 	</table>
 </c:if>
+</div>
 </body>
 </html>

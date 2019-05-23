@@ -22,6 +22,10 @@ public class Person {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name="GROUPS_ID")
+	private int group_name;
+	
+
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -129,6 +133,14 @@ public class Person {
 
 	public void setBalance(String balance) {
 		this.balance = balance;
+	}
+
+	public int getGroup_name() {
+		return group_name;
+	}
+
+	public void setGroup_name(int group_name) {
+		this.group_name = group_name;
 	}
 
 	@Override

@@ -17,4 +17,6 @@ public interface PersonDAO {
 	public void removePerson(int id);
 	public Group getGroupById(int id);
 	public void removeGroup(int id);
+	public List<Group> groupNameList();
+	public  List<Person> getUserByGroupId(int id);
 }

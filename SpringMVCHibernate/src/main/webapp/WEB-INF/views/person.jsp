@@ -13,6 +13,8 @@
 	</style>
 </head>
 <body>
+<jsp:include page="header.jsp" />  
+<div class="container">
 <h1>
 	Add a Person
 </h1>
@@ -25,7 +27,7 @@
 	<tr>
 		<td>
 			<form:label path="id">
-				<spring:message text="ID"/>
+				<spring:message text="ID"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -36,9 +38,24 @@
 	</c:if>
 	
 	<tr>
+	<td>
+			<form:label path="group_name">
+				<spring:message text="Group Name"/>&nbsp;&nbsp;
+			</form:label>
+		</td>
+	<td><form:select path="group_name">
+                <form:option value="0" label="--- Select ---" />
+                <c:forEach var="theUser" items="${listGroups}">
+                    <form:option value="${theUser.id}"><c:out value="${theUser.groupName}"/></form:option>
+                </c:forEach>
+                </form:select>
+            </td>
+	</tr>
+	
+	<tr>
 		<td>
 			<form:label path="firstName">
-				<spring:message text="First Name"/>
+				<spring:message text="First Name"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -50,7 +67,7 @@
 	<tr>
 		<td>
 			<form:label path="firstName">
-				<spring:message text="First Name"/>
+				<spring:message text="First Name"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -61,7 +78,7 @@
 	<tr>
 		<td>
 			<form:label path="lastName">
-				<spring:message text="Last Name"/>
+				<spring:message text="Last Name"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -72,7 +89,7 @@
 	<tr>
 		<td>
 			<form:label path="occupation">
-				<spring:message text="Occupation"/>
+				<spring:message text="Occupation"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -83,7 +100,7 @@
 	<tr>
 		<td>
 			<form:label path="contactNumber">
-				<spring:message text="Contact Number"/>
+				<spring:message text="Contact Number"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -94,7 +111,7 @@
 	<tr>
 		<td>
 			<form:label path="address">
-				<spring:message text="Address"/>
+				<spring:message text="Address"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -105,7 +122,7 @@
 	<tr>
 		<td>
 			<form:label path="emailAddress">
-				<spring:message text="Email Address"/>
+				<spring:message text="Email Address"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -116,7 +133,7 @@
 	<tr>
 		<td>
 			<form:label path="active">
-				<spring:message text="Active"/>
+				<spring:message text="Active"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
 		<td>
@@ -127,6 +144,7 @@
 	
 	<tr>
 		<td colspan="2">
+		</br>
 			<c:if test="${!empty person.firstName}">
 				<input type="submit"
 					value="<spring:message text="Edit Person"/>" />
@@ -168,5 +186,6 @@
 	</c:forEach>
 	</table>
 </c:if>
+</div>
 </body>
 </html>
