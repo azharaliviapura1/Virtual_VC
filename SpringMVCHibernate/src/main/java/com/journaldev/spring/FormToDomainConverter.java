@@ -11,4 +11,9 @@ public class FormToDomainConverter {
 		return p;
 	}
 	
+	public static PersonForm convertPersonDomainToForm(Person p,PersonForm pForm)
+	{
+		pForm.setFirstName(p.getFirstName());
+		return pForm;
+	}
 }

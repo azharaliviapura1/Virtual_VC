@@ -77,7 +77,11 @@ public class PersonController {
  
     @RequestMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") int id, Model model){
-        model.addAttribute("person", this.personService.getPersonById(id));
+    	
+    	Person p = this.personService.getPersonById(id);
+    	PersonForm pFrom = FormToDomainConverter.convertPersonDomainToForm(p, new PersonForm());
+    	
+        model.addAttribute("person", pFrom);
         model.addAttribute("listPersons", this.personService.listPersons());
         return "person";
     }
