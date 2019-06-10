@@ -39,11 +39,11 @@
 	
 	<tr>
 	<td>
-			<form:label path="group_name">
+			<form:label path="groupId">
 				<spring:message text="Group Name"/>&nbsp;&nbsp;
 			</form:label>
 		</td>
-	<td><form:select path="group_name">
+	<td><form:select path="groupId">
                 <form:option value="0" label="--- Select ---" />
                 <c:forEach var="theUser" items="${listGroups}">
                     <form:option value="${theUser.id}"><c:out value="${theUser.groupName}"/></form:option>

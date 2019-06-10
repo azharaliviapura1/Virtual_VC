@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.journaldev.spring.model.CreditDebit;
 import com.journaldev.spring.model.Group;
 import com.journaldev.spring.model.Person;
+import com.journaldev.spring.service.PersonForm;
 import com.journaldev.spring.service.PersonService;
 
 @Controller
@@ -42,7 +43,7 @@ public class PersonController {
 	
 	@RequestMapping(value = "/persons", method = RequestMethod.GET)
 	public String listPersons(Model model) {
-		model.addAttribute("person", new Person());
+		model.addAttribute("person", new PersonForm());
 		model.addAttribute("listPersons", this.personService.listPersons());
 		model.addAttribute("listGroups", this.personService.listGroups());
 		return "person";
@@ -50,13 +51,16 @@ public class PersonController {
 	
 	//For add and update person both
 	@RequestMapping(value= "/person/add", method = RequestMethod.POST)
-	public String addPerson(@ModelAttribute("person") Person p){
+	public String addPerson(@ModelAttribute("person") PersonForm pForm){
 		
-		if(p.getId() == 0){
-			//new person, add it
+		if(pForm.getId() == 0){
+			//new person, add it.
+			
+			Person p = FormToDomainConverter.convertPersonFormToDomain(pForm,new Person());
 			this.personService.addPerson(p);
 		}else{
 			//existing person, call update
+			Person p = FormToDomainConverter.convertPersonFormToDomain(pForm,new Person());
 			this.personService.updatePerson(p);
 		}
 		
