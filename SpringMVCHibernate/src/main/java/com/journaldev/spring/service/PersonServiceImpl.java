@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.journaldev.spring.dao.PersonDAO;
+import com.journaldev.spring.model.CreditDebit;
 import com.journaldev.spring.model.Group;
 import com.journaldev.spring.model.Person;
 
@@ -84,6 +85,18 @@ public class PersonServiceImpl implements PersonService {
 		// TODO Auto-generated method stub
 		return this.personDAO.getUserByGroupId(id);
 	}
+	
+	@Override
+	@Transactional
+	public void addTransaction(CreditDebit creditDebit)
+	{
+		this.personDAO.addTransaction(creditDebit);
+	}
 
+	@Override
+	@Transactional
+	public List<CreditDebit> getCreditDebit(int userId){
+		return this.personDAO.getCreditDebit(userId);
+	}
 
 }

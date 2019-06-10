@@ -2,6 +2,7 @@ package com.journaldev.spring.dao;
 
 import java.util.List;
 
+import com.journaldev.spring.model.CreditDebit;
 import com.journaldev.spring.model.Group;
 import com.journaldev.spring.model.Person;
 
@@ -19,4 +20,6 @@ public interface PersonDAO {
 	public void removeGroup(int id);
 	public List<Group> groupNameList();
 	public  List<Person> getUserByGroupId(int id);
-}
+	public void addTransaction(CreditDebit creditDebit);
+	public List<CreditDebit> getCreditDebit(int userId);
+ }

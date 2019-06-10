@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.journaldev.spring.model.CreditDebit;
 import com.journaldev.spring.model.Group;
 import com.journaldev.spring.model.Person;
 
@@ -134,6 +135,25 @@ public class PersonDAOImpl implements PersonDAO {
 		query.setParameter("group_id",id);
 		List<Person> personsList = query.list();
 		return personsList;
+	}
+	
+	@Override
+	public void addTransaction(CreditDebit creditDebit)
+	{
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(creditDebit);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CreditDebit> getCreditDebit(int userId)
+	{
+		Session session = this.sessionFactory.getCurrentSession();
+		String hql = "from CreditDebit where user_id= :userId";
+		Query query = session.createQuery(hql);
+		query.setParameter("userId",userId);
+		List<CreditDebit> creditDebitList = query.list();
+		return creditDebitList;
 	}
 
 

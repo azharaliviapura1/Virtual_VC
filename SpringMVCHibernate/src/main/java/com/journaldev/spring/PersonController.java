@@ -139,5 +139,30 @@ public class PersonController {
     	  String strPersonList = gson.toJson(personsList);
     	  return strPersonList;
       }
+      
+      @RequestMapping(value = "/user/transaction", method = RequestMethod.POST)
+      public String addTransaction(@ModelAttribute("creditDebit") CreditDebit creditDebit) {
+    	 
+    			this.personService.addTransaction(creditDebit);
+  		return "creditDebit";
+  	}
+      
+      
+      
+      @RequestMapping(value = "/loadTransactionDetails", method = RequestMethod.GET, produces = "application/json")
+      @ResponseBody
+      public String loadTransactionDetails(@RequestParam int groupId,@RequestParam int userId, HttpServletRequest request,
+  	        HttpServletResponse
+  	        response) {
+  	  System.out.println("userId"+userId);
+  	  List<CreditDebit> creditDebitList = this.personService.getCreditDebit(userId);
+  	  for(int i = 0; i< creditDebitList.size() ; i++)
+  	  {
+  		  System.out.println(creditDebitList.get(i).getUser_id());
+  	  }
+  	  Gson gson = new Gson();
+  	  String strPersonList = gson.toJson(creditDebitList);
+  	  return strPersonList;
+    }
     
 }

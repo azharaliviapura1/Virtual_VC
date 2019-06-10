@@ -42,6 +42,7 @@
 			<beans:list>
 				<beans:value>com.journaldev.spring.model.Person</beans:value>
 				<beans:value>com.journaldev.spring.model.Group</beans:value>
+				<beans:value>com.journaldev.spring.model.CreditDebit</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
